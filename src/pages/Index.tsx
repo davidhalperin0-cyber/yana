@@ -3,6 +3,7 @@ import { AnimatePresence } from "framer-motion";
 import { LoadingAnimation } from "@/components/LoadingAnimation";
 import { HeroSection } from "@/components/HeroSection";
 import { AboutSection } from "@/components/AboutSection";
+import { WhyChooseUsSection } from "@/components/WhyChooseUsSection";
 import { ServicesSection } from "@/components/ServicesSection";
 import { TestimonialsSection } from "@/components/TestimonialsSection";
 import { SocialSection } from "@/components/SocialSection";
@@ -27,6 +28,7 @@ const Index = () => {
         <main className="overflow-hidden">
           <HeroSection />
           <AboutSection />
+          <WhyChooseUsSection />
           <ServicesSection />
           <TestimonialsSection />
           <SocialSection />
