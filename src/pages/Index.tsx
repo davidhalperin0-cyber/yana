@@ -1,13 +1,40 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState, useEffect } from "react";
+import { AnimatePresence } from "framer-motion";
+import { LoadingAnimation } from "@/components/LoadingAnimation";
+import { HeroSection } from "@/components/HeroSection";
+import { AboutSection } from "@/components/AboutSection";
+import { ServicesSection } from "@/components/ServicesSection";
+import { TestimonialsSection } from "@/components/TestimonialsSection";
+import { SocialSection } from "@/components/SocialSection";
+import { ContactSection } from "@/components/ContactSection";
+import { Footer } from "@/components/Footer";
 
 const Index = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Ensure smooth scrolling
+    document.documentElement.style.scrollBehavior = "smooth";
+  }, []);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
-    </div>
+    <>
+      <AnimatePresence mode="wait">
+        {isLoading && <LoadingAnimation onComplete={() => setIsLoading(false)} />}
+      </AnimatePresence>
+
+      {!isLoading && (
+        <main className="overflow-hidden">
+          <HeroSection />
+          <AboutSection />
+          <ServicesSection />
+          <TestimonialsSection />
+          <SocialSection />
+          <ContactSection />
+          <Footer />
+        </main>
+      )}
+    </>
   );
 };
 
