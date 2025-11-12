@@ -146,7 +146,7 @@ export const ContactSection = () => {
                 <Button
                   type="submit"
                   size="lg"
-                  className="w-full bg-gradient-primary hover:opacity-90 text-white shadow-luxury text-lg py-6"
+                  className="w-full bg-gradient-primary hover:opacity-90 text-white shadow-luxury text-lg py-6 letter-glow"
                 >
                   Let's Create Magic
                 </Button>

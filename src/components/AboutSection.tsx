@@ -24,7 +24,7 @@ export const AboutSection = () => {
             <div className="w-16 h-1 bg-gradient-primary mx-auto rounded-full" />
           </motion.div>
 
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-8 text-foreground">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-8 text-primary">
             Our Story
           </h2>
 
@@ -34,7 +34,7 @@ export const AboutSection = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-6"
           >
-            We are a <span className="text-primary font-semibold">world-class event design and production studio</span>, creating exclusive experiences across the globe. From luxury weddings to immersive corporate events, we transform visions into unforgettable realities.
+            We create <span className="text-primary font-semibold">extraordinary, nature-inspired events</span> across the world — merging design, emotion, and environment into unforgettable experiences.
           </motion.p>
 
           <motion.p
@@ -43,7 +43,7 @@ export const AboutSection = () => {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="text-lg md:text-xl text-muted-foreground leading-relaxed"
           >
-            Our passion lies in the art of celebration — blending creativity, innovation, and meticulous attention to detail. Every event we craft tells a unique story, leaving lasting impressions on hearts and minds.
+            From mystical forest ceremonies to desert sunset celebrations, we blend the raw beauty of nature with sophisticated luxury to craft moments that touch the soul.
           </motion.p>
 
           <motion.div

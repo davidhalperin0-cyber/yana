@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 import { Button } from "./ui/button";
-import heroImage from "@/assets/hero-bg.jpg";
+import heroImage from "@/assets/nature-hero-bg.jpg";
 
 export const HeroSection = () => {
   const scrollToNext = () => {
@@ -25,22 +25,24 @@ export const HeroSection = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-background" />
       </motion.div>
 
-      {/* Floating particles */}
+      {/* Floating mist particles */}
       <div className="absolute inset-0 z-10">
-        {[...Array(15)].map((_, i) => (
+        {[...Array(20)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-2 h-2 bg-primary/30 rounded-full blur-sm"
+            className="absolute w-3 h-3 bg-primary/20 rounded-full blur-md"
             initial={{
               x: Math.random() * window.innerWidth,
               y: Math.random() * window.innerHeight,
             }}
             animate={{
-              y: [null, Math.random() * -100],
-              opacity: [0.3, 1, 0.3],
+              y: [null, Math.random() * -150],
+              x: [null, Math.random() * 50 - 25],
+              opacity: [0.2, 0.6, 0.2],
+              scale: [1, 1.5, 1],
             }}
             transition={{
-              duration: Math.random() * 3 + 3,
+              duration: Math.random() * 5 + 4,
               repeat: Infinity,
               ease: "easeInOut",
             }}
@@ -56,23 +58,32 @@ export const HeroSection = () => {
           transition={{ delay: 0.3, duration: 0.8 }}
         >
           <motion.h1
-            className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold mb-6 text-white"
+            className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold mb-6 text-background letter-glow"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.8 }}
           >
-            Crafting Unforgettable
+            Designing Nature-Inspired
             <br />
-            <span className="text-gradient">Moments</span>
+            <span className="text-primary drop-shadow-glow">Luxury Events</span>
           </motion.h1>
 
           <motion.p
-            className="text-xl md:text-2xl text-white/90 mb-12 max-w-2xl mx-auto"
+            className="text-xl md:text-2xl text-background/90 mb-4 max-w-2xl mx-auto font-light"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7, duration: 0.8 }}
           >
-            World-class event design and production creating exclusive experiences across the globe
+            Designing Experiences That Touch the Soul
+          </motion.p>
+          
+          <motion.p
+            className="text-lg md:text-xl text-background/80 mb-12 max-w-2xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8, duration: 0.8 }}
+          >
+            Merging nature's elements with luxury design to create extraordinary, unforgettable experiences
           </motion.p>
 
           <motion.div
@@ -91,7 +102,7 @@ export const HeroSection = () => {
             <Button
               size="lg"
               variant="outline"
-              className="bg-white/10 backdrop-blur-md border-white/30 text-white hover:bg-white/20 text-lg px-8 py-6"
+              className="bg-background/10 backdrop-blur-md border-background/30 text-background hover:bg-background/20 text-lg px-8 py-6"
               onClick={scrollToNext}
             >
               Discover More
@@ -111,7 +122,7 @@ export const HeroSection = () => {
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
           >
-            <ArrowDown className="w-8 h-8 text-white/70" />
+            <ArrowDown className="w-8 h-8 text-background/70" />
           </motion.div>
         </motion.div>
       </div>

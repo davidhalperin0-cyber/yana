@@ -56,11 +56,14 @@ export default {
         'gradient-primary': 'var(--gradient-primary)',
         'gradient-hero': 'var(--gradient-hero)',
         'gradient-card': 'var(--gradient-card)',
+        'gradient-forest': 'var(--gradient-forest)',
+        'gradient-desert': 'var(--gradient-desert)',
       },
       boxShadow: {
         'luxury': 'var(--shadow-luxury)',
         'soft': 'var(--shadow-soft)',
         'glow': 'var(--shadow-glow)',
+        'mist': 'var(--shadow-mist)',
       },
       borderRadius: {
         lg: "var(--radius)",

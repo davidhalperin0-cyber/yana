@@ -7,22 +7,22 @@ const services = [
   {
     icon: Palette,
     title: "Luxury Event Design",
-    description: "Custom concepts and full visual identity tailored to your unique vision. From color palettes to décor, every detail is perfected.",
+    description: "Elegant concepts inspired by natural elements — forest greens, desert gold, and coastal serenity woven into sophisticated design.",
   },
   {
     icon: Calendar,
-    title: "Event Production & Management",
-    description: "From planning to execution with precision. We handle logistics, timelines, and coordination so you can enjoy the moment.",
+    title: "Full Event Production",
+    description: "Immersive experiences with artistic storytelling, blending nature's beauty with modern luxury for seamless execution.",
   },
   {
     icon: Globe,
     title: "Destination Events",
-    description: "Exotic and breathtaking locations worldwide. We create immersive experiences in the most stunning venues across the globe.",
+    description: "Magical settings in deserts, forests, and coastal paradises — transforming natural landscapes into breathtaking celebrations.",
   },
   {
     icon: Sparkles,
     title: "Creative Direction & Styling",
-    description: "Artistic supervision, stage design, and aesthetic storytelling. We bring your story to life through visual excellence.",
+    description: "Aesthetic harmony between nature and modern luxury — creating visual poetry through light, texture, and organic elements.",
   },
 ];
 
