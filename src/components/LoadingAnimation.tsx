@@ -70,9 +70,9 @@ export const LoadingAnimation = ({ onComplete }: LoadingAnimationProps) => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.6 }}
-          className="text-4xl md:text-5xl font-serif font-bold mb-4 text-gradient"
+          className="text-4xl md:text-5xl font-bold mb-4 text-gradient"
         >
-          Luxury Events
+          אירועי שטח
         </motion.h1>
 
         <motion.p
@@ -81,7 +81,7 @@ export const LoadingAnimation = ({ onComplete }: LoadingAnimationProps) => {
           transition={{ delay: 0.5, duration: 0.6 }}
           className="text-muted-foreground mb-8"
         >
-          Crafting Unforgettable Moments
+          יצירת רגעים בלתי נשכחים
         </motion.p>
 
         {/* Progress bar */}

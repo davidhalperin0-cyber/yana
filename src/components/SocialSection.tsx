@@ -1,26 +1,26 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { Instagram, Linkedin, PinIcon as Pinterest } from "lucide-react";
+import { Instagram, Facebook, MessageCircle } from "lucide-react";
 
 const socialLinks = [
   {
     icon: Instagram,
     name: "Instagram",
-    href: "#",
+    href: "https://www.instagram.com/yanagolan?igsh=MWx5YW1vbncxbTBpeA==",
     color: "from-purple-500 to-pink-500",
   },
   {
-    icon: Pinterest,
-    name: "Pinterest",
-    href: "#",
-    color: "from-red-500 to-red-600",
+    icon: Facebook,
+    name: "Facebook",
+    href: "https://www.facebook.com/share/17gNPo7dWn/?mibextid=wwXIfr",
+    color: "from-blue-500 to-blue-600",
   },
   {
-    icon: Linkedin,
-    name: "LinkedIn",
-    href: "#",
-    color: "from-blue-500 to-blue-600",
+    icon: MessageCircle,
+    name: "WhatsApp",
+    href: "https://wa.me/972546480748",
+    color: "from-green-500 to-green-600",
   },
 ];
 
@@ -37,11 +37,11 @@ export const SocialSection = () => {
           transition={{ duration: 0.8 }}
         >
           <div className="w-16 h-1 bg-gradient-primary mx-auto rounded-full mb-4" />
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-4">
-            Follow Our Journey
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+            עקבו אחר המסע שלי
           </h2>
           <p className="text-lg text-muted-foreground mb-12">
-            Get inspired by our latest creations and behind-the-scenes moments
+            קבלי השראה מהיצירות האחרונות שלי ורגעים מאחורי הקלעים
           </p>
 
           <div className="flex flex-wrap justify-center gap-6">

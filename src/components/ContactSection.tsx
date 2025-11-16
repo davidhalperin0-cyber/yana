@@ -7,19 +7,64 @@ import { Textarea } from "./ui/textarea";
 import { toast } from "sonner";
 import { Mail, Phone, MapPin } from "lucide-react";
 
-export const ContactSection = () => {
+interface ContactSectionProps {
+  onFormSubmit?: () => void;
+}
+
+export const ContactSection = ({ onFormSubmit }: ContactSectionProps) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    phone: "",
     message: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success("Thank you! We'll be in touch soon to create magic together.");
-    setFormData({ name: "", email: "", message: "" });
+    setIsSubmitting(true);
+
+    try {
+      // Using Web3Forms - simple email service
+      // Get your access key from https://web3forms.com (free, no signup needed)
+      const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || "YOUR_ACCESS_KEY";
+
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: accessKey,
+          subject: `פנייה חדשה מאתר - ${formData.name}`,
+          from_name: formData.name,
+          email: formData.email,
+          message: `שם: ${formData.name}\nאימייל: ${formData.email}\nטלפון: ${formData.phone}\n\nהודעה:\n${formData.message}`,
+          to_email: "yanchigolan@gmail.com",
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        toast.success("תודה! אהיה בקשר בקרוב כדי ליצור קסם יחד.");
+        setFormData({ name: "", email: "", phone: "", message: "" });
+        // Trigger course page display
+        if (onFormSubmit) {
+          onFormSubmit();
+        }
+      } else {
+        throw new Error("Failed to send email");
+      }
+    } catch (error) {
+      console.error("Error sending email:", error);
+      toast.error("אירעה שגיאה בשליחת ההודעה. נסי שוב מאוחר יותר.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -39,78 +84,24 @@ export const ContactSection = () => {
           className="text-center mb-16"
         >
           <div className="w-16 h-1 bg-gradient-primary mx-auto rounded-full mb-4" />
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-4">
-            Let's Create Magic
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+            לקבלת המדריך
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Ready to bring your vision to life? Get in touch and let's craft an unforgettable experience together.
-          </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-12">
-          {/* Contact Info */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="space-y-8"
-          >
-            <div>
-              <h3 className="text-2xl font-serif font-bold mb-6">Get In Touch</h3>
-              <div className="space-y-4">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-gradient-primary flex items-center justify-center flex-shrink-0">
-                    <Mail className="w-5 h-5 text-white" />
-                  </div>
-                  <div>
-                    <p className="font-semibold">Email</p>
-                    <p className="text-muted-foreground">hello@luxuryevents.com</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-gradient-primary flex items-center justify-center flex-shrink-0">
-                    <Phone className="w-5 h-5 text-white" />
-                  </div>
-                  <div>
-                    <p className="font-semibold">Phone</p>
-                    <p className="text-muted-foreground">+1 (555) 123-4567</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-gradient-primary flex items-center justify-center flex-shrink-0">
-                    <MapPin className="w-5 h-5 text-white" />
-                  </div>
-                  <div>
-                    <p className="font-semibold">Location</p>
-                    <p className="text-muted-foreground">New York, NY | Los Angeles, CA</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="glass-card p-6 rounded-2xl">
-              <h4 className="font-semibold mb-2">Office Hours</h4>
-              <p className="text-muted-foreground text-sm">
-                Monday - Friday: 9:00 AM - 6:00 PM EST
-                <br />
-                Weekend consultations available by appointment
-              </p>
-            </div>
-          </motion.div>
-
+        <div className="flex flex-col items-center">
           {/* Contact Form */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="w-full max-w-2xl mb-12"
           >
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <Input
                   name="name"
-                  placeholder="Your Name"
+                  placeholder="השם שלך"
                   value={formData.name}
                   onChange={handleChange}
                   required
@@ -122,8 +113,20 @@ export const ContactSection = () => {
                 <Input
                   name="email"
                   type="email"
-                  placeholder="Your Email"
+                  placeholder="האימייל שלך"
                   value={formData.email}
+                  onChange={handleChange}
+                  required
+                  className="h-12 bg-background/50 border-border/50 focus:border-primary transition-colors"
+                />
+              </div>
+
+              <div>
+                <Input
+                  name="phone"
+                  type="tel"
+                  placeholder="מספר הטלפון שלך"
+                  value={formData.phone}
                   onChange={handleChange}
                   required
                   className="h-12 bg-background/50 border-border/50 focus:border-primary transition-colors"
@@ -133,7 +136,7 @@ export const ContactSection = () => {
               <div>
                 <Textarea
                   name="message"
-                  placeholder="Tell us about your event vision..."
+                  placeholder="ספרי לי על החזון שלך לאירוע..."
                   value={formData.message}
                   onChange={handleChange}
                   required
@@ -146,15 +149,73 @@ export const ContactSection = () => {
                 <Button
                   type="submit"
                   size="lg"
-                  className="w-full bg-gradient-primary hover:opacity-90 text-white shadow-luxury text-lg py-6 letter-glow"
+                  disabled={isSubmitting}
+                  className="w-full bg-gradient-primary hover:opacity-90 text-white shadow-luxury text-lg py-6 letter-glow disabled:opacity-50"
                 >
-                  Let's Create Magic
+                  {isSubmitting ? "שולח..." : "לקבלת המדריך"}
                 </Button>
               </motion.div>
             </form>
+          </motion.div>
+
+          {/* Contact Info */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="w-full max-w-5xl"
+          >
+            <div>
+              <h3 className="text-2xl font-bold mb-6 text-center">ליצירת קשר</h3>
+              <div className="flex justify-between items-center gap-12 flex-nowrap">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-full bg-gradient-primary flex items-center justify-center flex-shrink-0">
+                    <Mail className="w-5 h-5 text-white" />
+                  </div>
+                  <div>
+                    <p className="font-semibold">אימייל</p>
+                    <a 
+                      href="mailto:yanchigolan@gmail.com?subject=פנייה מאתר" 
+                      className="text-muted-foreground hover:text-primary transition-colors cursor-pointer underline-offset-2 hover:underline"
+                    >
+                      yanchigolan@gmail.com
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-full bg-gradient-primary flex items-center justify-center flex-shrink-0">
+                    <Phone className="w-5 h-5 text-white" />
+                  </div>
+                  <div>
+                    <p className="font-semibold">טלפון</p>
+                    <a 
+                      href="tel:+972546480748" 
+                      className="text-muted-foreground hover:text-primary transition-colors cursor-pointer text-lg font-medium tracking-wide"
+                      dir="ltr"
+                    >
+                      +972 54-648-0748
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-full bg-gradient-primary flex items-center justify-center flex-shrink-0">
+                    <MapPin className="w-5 h-5 text-white" />
+                  </div>
+                  <div>
+                    <p className="font-semibold">מיקום</p>
+                    <p className="text-muted-foreground">ראשון לציון</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </motion.div>
         </div>
       </div>
     </section>
   );
 };
+
+
+

@@ -1,28 +1,34 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { Award, Heart, Globe2, Sparkles } from "lucide-react";
+
+// Custom icon component for numbers
+const NumberIcon = ({ number }: { number: string }) => (
+  <span className="text-4xl md:text-5xl font-black tracking-tight text-white drop-shadow-[0_4px_8px_rgba(0,0,0,0.3)]" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+    {number}
+  </span>
+);
 
 const reasons = [
   {
-    icon: Award,
-    title: "Award-Winning Excellence",
-    description: "Recognized globally for our innovative designs and flawless execution. Our portfolio speaks for itself.",
+    icon: () => <NumberIcon number="04" />,
+    title: "תצאו עם ביטחון לתהליך!",
+    description: "",
   },
   {
-    icon: Heart,
-    title: "Personalized Approach",
-    description: "Every event is unique. We listen, understand your vision, and bring it to life with meticulous attention to detail.",
+    icon: () => <NumberIcon number="03" />,
+    title: "טיפים לבחירת ספקים מותאמים:",
+    description: "",
   },
   {
-    icon: Globe2,
-    title: "Worldwide Network",
-    description: "Access to exclusive venues, top vendors, and luxury resources across the globe for truly unforgettable experiences.",
+    icon: () => <NumberIcon number="02" />,
+    title: "כל הדברים שאף אחד לא יגיד לכם לפני שאתם מתחילים לתכנן את החתונה!",
+    description: "",
   },
   {
-    icon: Sparkles,
-    title: "Seamless Experience",
-    description: "From concept to celebration, we handle every detail so you can relax and enjoy your special moment.",
+    icon: () => <NumberIcon number="01" />,
+    title: "איך תדעו האם חתונת שטח מתאימה לכם?",
+    description: "",
   },
 ];
 
@@ -43,17 +49,14 @@ export const WhyChooseUsSection = () => {
           className="text-center mb-16"
         >
           <div className="w-16 h-1 bg-gradient-primary mx-auto rounded-full mb-4" />
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-4">
-            Why Choose Us?
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+            מה אני מקבל במדריך
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Four compelling reasons to trust us with your most important moments
-          </p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {reasons.map((reason, index) => {
-            const Icon = reason.icon;
+            const IconComponent = reason.icon;
             return (
               <motion.div
                 key={index}
@@ -74,10 +77,10 @@ export const WhyChooseUsSection = () => {
                     transition={{ duration: 0.6 }}
                     className="w-20 h-20 rounded-full bg-gradient-primary flex items-center justify-center mb-6 shadow-luxury mx-auto"
                   >
-                    <Icon className="w-10 h-10 text-white" />
+                    <IconComponent />
                   </motion.div>
 
-                  <h3 className="text-xl font-serif font-bold mb-3 group-hover:text-primary transition-colors duration-300">
+                  <h3 className={`${reason.title === "איך תדעו האם חתונת שטח מתאימה לכם" || reason.title === "כל הדברים שאף אחד לא יגיד לכם לפני שאתם מתחילים לתכנן את החתונה" ? "text-xl md:text-2xl leading-tight break-words" : "text-xl"} font-bold mb-3 group-hover:text-primary transition-colors duration-300`}>
                     {reason.title}
                   </h3>
 

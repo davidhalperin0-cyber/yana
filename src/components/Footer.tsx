@@ -20,14 +20,12 @@ export const Footer = () => {
       
       <div className="max-w-6xl mx-auto text-center relative z-10">
         <div className="mb-4">
-          <h3 className="text-2xl font-serif font-bold mb-2">Luxury Events</h3>
-          <p className="text-background/70">Designing Experiences That Touch the Soul</p>
+          <h3 className="text-2xl font-bold mb-2">Outdoor Events</h3>
+          <p className="text-background/70">Designing experiences that touch the soul</p>
         </div>
         
         <div className="flex items-center justify-center gap-2 text-sm text-background/60">
-          <span>Made with</span>
-          <Heart className="w-4 h-4 fill-primary text-primary" />
-          <span>© 2024 Luxury Events. All rights reserved.</span>
+          <span>© 2024 Outdoor Events by Yana Golan. All rights reserved to David Halperin.</span>
         </div>
       </div>
     </footer>

@@ -2,27 +2,35 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { Sparkles, Calendar, Globe, Palette } from "lucide-react";
+import serviceImage1 from "@/assets/service1.jpeg";
+import serviceImage2 from "@/assets/service2.jpeg";
+import serviceImage3 from "@/assets/service3.jpeg";
+import serviceImage4 from "@/assets/service4.jpeg";
 
 const services = [
   {
     icon: Palette,
-    title: "Luxury Event Design",
-    description: "Elegant concepts inspired by natural elements — forest greens, desert gold, and coastal serenity woven into sophisticated design.",
+    title: "עיצוב ובינוי מתכנון סקיצה ועד הקמת מתחם מלא",
+    description: "מהרעיון הקריאטיבי ועד הביצוע בפועל, עיצוב, בינוי ועיצוב חללים שמשאירים רושם.",
+    image: serviceImage1,
   },
   {
     icon: Calendar,
-    title: "Full Event Production",
-    description: "Immersive experiences with artistic storytelling, blending nature's beauty with modern luxury for seamless execution.",
+    title: "הפקה טכנית וניהול ומדויק מאחורי הקלעים",
+    description: "תיאום, ניהול צוותים ותפעול מערכות בשידור חי",
+    image: serviceImage2,
   },
   {
     icon: Globe,
-    title: "Destination Events",
-    description: "Magical settings in deserts, forests, and coastal paradises — transforming natural landscapes into breathtaking celebrations.",
+    title: "בימוי והפקה לאירועי תוכן ותקשורת",
+    description: "שילוב בין עולמות הבמה, הצילום וההפקה",
+    image: serviceImage4,
   },
   {
     icon: Sparkles,
-    title: "Creative Direction & Styling",
-    description: "Aesthetic harmony between nature and modern luxury — creating visual poetry through light, texture, and organic elements.",
+    title: "קונסטרוקציה והפקה בשטח",
+    description: "בנייה, הקמה ותיאום בין אנשי מקצוע",
+    image: serviceImage3,
   },
 ];
 
@@ -40,11 +48,11 @@ export const ServicesSection = () => {
           className="text-center mb-16"
         >
           <div className="w-16 h-1 bg-gradient-primary mx-auto rounded-full mb-4" />
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-4">
-            Our Services
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+            השירותים שלי
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Comprehensive event solutions crafted with excellence and attention to detail
+            פתרונות אירועים מקיפים מעוצבים במצוינות ותשומת לב לפרטים
           </p>
         </motion.div>
 
@@ -66,6 +74,15 @@ export const ServicesSection = () => {
                 </div>
 
                 <div className="relative z-10">
+                  {/* Service Image */}
+                  <div className="mb-6 rounded-xl overflow-hidden bg-background/50">
+                    <img
+                      src={service.image}
+                      alt={service.title}
+                      className="w-full h-64 md:h-80 object-contain group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+
                   <motion.div
                     whileHover={{ rotate: 360, scale: 1.1 }}
                     transition={{ duration: 0.6 }}
@@ -74,7 +91,7 @@ export const ServicesSection = () => {
                     <Icon className="w-8 h-8 text-white" />
                   </motion.div>
 
-                  <h3 className="text-2xl font-serif font-bold mb-4 group-hover:text-primary transition-colors duration-300">
+                  <h3 className="text-2xl font-bold mb-4 group-hover:text-primary transition-colors duration-300">
                     {service.title}
                   </h3>
 

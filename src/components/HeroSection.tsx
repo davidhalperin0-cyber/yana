@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 import { Button } from "./ui/button";
-import heroImage from "@/assets/nature-hero-bg.jpg";
+import heroBackground from "@/assets/Gemini_Generated_Image_ajl9nlajl9nlajl9.png";
 
 export const HeroSection = () => {
   const scrollToNext = () => {
@@ -20,7 +20,11 @@ export const HeroSection = () => {
       >
         <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${heroImage})` }}
+          style={{ 
+            backgroundImage: `url(${heroBackground})`,
+            backgroundPosition: 'center top',
+            backgroundSize: 'cover'
+          }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-background" />
       </motion.div>
@@ -58,14 +62,14 @@ export const HeroSection = () => {
           transition={{ delay: 0.3, duration: 0.8 }}
         >
           <motion.h1
-            className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold mb-6 text-background letter-glow"
+            className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 text-background letter-glow"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.8 }}
           >
-            Designing Nature-Inspired
+            מדריך לזוגות
             <br />
-            <span className="text-primary drop-shadow-glow">Luxury Events</span>
+            <span className="text-primary drop-shadow-glow">שלא רוצים אולם</span>
           </motion.h1>
 
           <motion.p
@@ -74,7 +78,7 @@ export const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7, duration: 0.8 }}
           >
-            Designing Experiences That Touch the Soul
+            <span className="font-bold">אירועי שטח בטבע תחת כיפת השמיים</span>
           </motion.p>
           
           <motion.p
@@ -83,7 +87,7 @@ export const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 0.8 }}
           >
-            Merging nature's elements with luxury design to create extraordinary, unforgettable experiences
+            <span className="font-bold">גלו את הקסם של אירועים בטבע - מדבר, יער, ים, נהר, או כל מקום אחר. כל מה שצריך לדעת כדי להפוך שטח פתוח לחתונה הכי מיוחדת שראיתם.</span>
           </motion.p>
 
           <motion.div
@@ -97,7 +101,7 @@ export const HeroSection = () => {
               className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-luxury text-lg px-8 py-6"
               onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
             >
-              Let's Create Magic
+              לקבלת המדריך
             </Button>
             <Button
               size="lg"
@@ -105,7 +109,7 @@ export const HeroSection = () => {
               className="bg-background/10 backdrop-blur-md border-background/30 text-background hover:bg-background/20 text-lg px-8 py-6"
               onClick={scrollToNext}
             >
-              Discover More
+              גלו עוד
             </Button>
           </motion.div>
         </motion.div>
