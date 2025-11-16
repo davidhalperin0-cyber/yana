@@ -3,7 +3,11 @@ import { ArrowDown } from "lucide-react";
 import { Button } from "./ui/button";
 import heroBackground from "@/assets/Gemini_Generated_Image_ajl9nlajl9nlajl9.png";
 
-export const HeroSection = () => {
+interface HeroSectionProps {
+  onGoToCourse?: () => void;
+}
+
+export const HeroSection = ({ onGoToCourse }: HeroSectionProps) => {
   const scrollToNext = () => {
     const aboutSection = document.getElementById("about");
     aboutSection?.scrollIntoView({ behavior: "smooth" });
@@ -96,13 +100,23 @@ export const HeroSection = () => {
             transition={{ delay: 0.9, duration: 0.6 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
-            <Button
-              size="lg"
-              className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-luxury text-lg px-8 py-6"
-              onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
-            >
-              לקבלת המדריך
-            </Button>
+            {onGoToCourse ? (
+              <Button
+                size="lg"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-luxury text-lg px-8 py-6"
+                onClick={onGoToCourse}
+              >
+                חזרה למדריך
+              </Button>
+            ) : (
+              <Button
+                size="lg"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-luxury text-lg px-8 py-6"
+                onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+              >
+                לקבלת המדריך
+              </Button>
+            )}
             <Button
               size="lg"
               variant="outline"

@@ -8,7 +8,7 @@ import { toast } from "sonner";
 import { Mail, Phone, MapPin } from "lucide-react";
 
 interface ContactSectionProps {
-  onFormSubmit?: () => void;
+  onFormSubmit?: (email?: string) => void;
 }
 
 export const ContactSection = ({ onFormSubmit }: ContactSectionProps) => {
@@ -58,10 +58,12 @@ export const ContactSection = ({ onFormSubmit }: ContactSectionProps) => {
 
       if (result.success) {
         toast.success("תודה! אהיה בקשר בקרוב כדי ליצור קסם יחד.");
+        // Save email before clearing form
+        const userEmail = formData.email;
         setFormData({ name: "", email: "", phone: "", message: "" });
-        // Trigger course page display
+        // Trigger course page display with email
         if (onFormSubmit) {
-          onFormSubmit();
+          onFormSubmit(userEmail);
         }
       } else {
         console.error("Web3Forms error:", result);

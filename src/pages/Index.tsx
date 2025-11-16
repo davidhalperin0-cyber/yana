@@ -18,24 +18,29 @@ const Index = () => {
   const [showCourse, setShowCourse] = useState(false);
 
   useEffect(() => {
-    // Check if form was submitted (stored in localStorage)
-    const formSubmitted = localStorage.getItem("formSubmitted") === "true";
-    if (formSubmitted) {
+    // Check if user has access to course (stored in localStorage)
+    const hasCourseAccess = localStorage.getItem("courseAccess") === "true";
+    if (hasCourseAccess) {
       setShowCourse(true);
     }
     // Ensure smooth scrolling
     document.documentElement.style.scrollBehavior = "smooth";
   }, []);
 
-  const handleFormSubmit = () => {
-    localStorage.setItem("formSubmitted", "true");
+  const handleFormSubmit = (email?: string) => {
+    // Save access permanently - user will always have access
+    localStorage.setItem("courseAccess", "true");
+    if (email) {
+      // Also save email for future reference
+      localStorage.setItem("userEmail", email);
+    }
     setShowCourse(true);
     // Scroll to top
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleBackToHome = () => {
-    localStorage.removeItem("formSubmitted");
+    // Don't remove access - user can always come back
     setShowCourse(false);
     // Scroll to top
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -57,7 +62,7 @@ const Index = () => {
             </>
           ) : (
             <>
-              <HeroSection />
+              <HeroSection onGoToCourse={localStorage.getItem("courseAccess") === "true" ? () => setShowCourse(true) : undefined} />
               <AboutSection />
               <WhyChooseUsSection />
               <PartnersSection />
