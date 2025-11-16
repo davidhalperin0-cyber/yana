@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 import { Button } from "./ui/button";
-import heroBackground from "@/assets/Gemini_Generated_Image_ajl9nlajl9nlajl9.png";
+import heroBackground from "@/assets/Gemini_Generated_Image_ybu7yqybu7yqybu7.png";
 
 interface HeroSectionProps {
   onGoToCourse?: () => void;
