@@ -1,5 +1,4 @@
-import { motion, AnimatePresence } from "framer-motion";
-import { useInView } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { ChevronRight, ChevronLeft } from "lucide-react";
 import { Button } from "./ui/button";
@@ -104,27 +103,22 @@ export const TestimonialsSection = () => {
             className="relative"
           >
             <div className="overflow-hidden relative min-h-[400px] md:min-h-[500px]">
-              <AnimatePresence initial={false}>
-                <motion.div
-                  key={currentIndex}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ 
-                    duration: 0.25, 
-                    ease: "easeInOut",
-                  }}
-                  className="relative w-full"
+              {testimonials.map((testimonial, index) => (
+                <div
+                  key={index}
+                  className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${
+                    index === currentIndex ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
+                  }`}
                 >
-                  <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-secondary/40 via-background to-secondary/30 flex items-center justify-center p-6">
+                  <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-secondary/40 via-background to-secondary/30 flex items-center justify-center p-6 h-full">
                     {/* Background layer that replaces white */}
                     <div className="absolute inset-0 bg-gradient-to-br from-secondary/50 via-background to-secondary/40 rounded-2xl" />
                     
                     {/* Image with blend mode to remove white background */}
                     <div className="relative z-10" style={{ isolation: 'isolate' }}>
                       <img
-                        src={testimonials[currentIndex].image}
-                        alt={`המלצה ${currentIndex + 1}`}
+                        src={testimonial.image}
+                        alt={`המלצה ${index + 1}`}
                         className="max-w-md w-full h-auto object-contain relative z-10"
                         style={{
                           mixBlendMode: 'multiply',
@@ -133,8 +127,8 @@ export const TestimonialsSection = () => {
                       />
                     </div>
                   </div>
-                </motion.div>
-              </AnimatePresence>
+                </div>
+              ))}
             </div>
           </motion.div>
 
