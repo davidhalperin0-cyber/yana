@@ -174,32 +174,32 @@ export const ContactSection = ({ onFormSubmit }: ContactSectionProps) => {
             className="w-full max-w-5xl"
           >
             <div>
-              <h3 className="text-2xl font-bold mb-6 text-center">ליצירת קשר</h3>
-              <div className="flex flex-col md:flex-row justify-between items-center gap-6 md:gap-12">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-gradient-primary flex items-center justify-center flex-shrink-0">
-                    <Mail className="w-5 h-5 text-white" />
+              <h3 className="text-xl md:text-2xl font-bold mb-6 text-center">ליצירת קשר</h3>
+              <div className="flex flex-col md:flex-row justify-between items-center gap-4 md:gap-12">
+                <div className="flex items-start gap-3 md:gap-4 w-full md:w-auto">
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-primary flex items-center justify-center flex-shrink-0">
+                    <Mail className="w-4 h-4 md:w-5 md:h-5 text-white" />
                   </div>
-                  <div>
-                    <p className="font-semibold">אימייל</p>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-semibold text-sm md:text-base">אימייל</p>
                     <a 
                       href="mailto:yanchigolan@gmail.com?subject=פנייה מאתר" 
-                      className="text-muted-foreground hover:text-primary transition-colors cursor-pointer underline-offset-2 hover:underline"
+                      className="text-muted-foreground hover:text-primary transition-colors cursor-pointer underline-offset-2 hover:underline text-sm md:text-base break-all"
                     >
                       yanchigolan@gmail.com
                     </a>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-gradient-primary flex items-center justify-center flex-shrink-0">
-                    <Phone className="w-5 h-5 text-white" />
+                <div className="flex items-start gap-3 md:gap-4 w-full md:w-auto">
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-primary flex items-center justify-center flex-shrink-0">
+                    <Phone className="w-4 h-4 md:w-5 md:h-5 text-white" />
                   </div>
-                  <div>
-                    <p className="font-semibold">טלפון</p>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-semibold text-sm md:text-base">טלפון</p>
                     <a 
                       href="tel:+972546480748" 
-                      className="text-muted-foreground hover:text-primary transition-colors cursor-pointer text-lg font-medium tracking-wide"
+                      className="text-muted-foreground hover:text-primary transition-colors cursor-pointer text-sm md:text-lg font-medium tracking-wide"
                       dir="ltr"
                     >
                       +972 54-648-0748
@@ -207,13 +207,13 @@ export const ContactSection = ({ onFormSubmit }: ContactSectionProps) => {
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-gradient-primary flex items-center justify-center flex-shrink-0">
-                    <MapPin className="w-5 h-5 text-white" />
+                <div className="flex items-start gap-3 md:gap-4 w-full md:w-auto">
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-primary flex items-center justify-center flex-shrink-0">
+                    <MapPin className="w-4 h-4 md:w-5 md:h-5 text-white" />
                   </div>
-                  <div>
-                    <p className="font-semibold">מיקום</p>
-                    <p className="text-muted-foreground">ראשון לציון</p>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-semibold text-sm md:text-base">מיקום</p>
+                    <p className="text-muted-foreground text-sm md:text-base">ראשון לציון</p>
                   </div>
                 </div>
               </div>
