@@ -33,6 +33,14 @@ export const TestimonialsSection = () => {
     }, 1500); // 1.5 seconds
   };
 
+  // Preload all images to prevent jumping
+  useEffect(() => {
+    testimonials.forEach((testimonial) => {
+      const img = new Image();
+      img.src = testimonial.image;
+    });
+  }, []);
+
   // Auto-rotate testimonials every 1.5 seconds
   useEffect(() => {
     startAutoRotate();
@@ -106,9 +114,14 @@ export const TestimonialsSection = () => {
               {testimonials.map((testimonial, index) => (
                 <div
                   key={index}
-                  className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${
-                    index === currentIndex ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
+                  className={`absolute inset-0 transition-opacity duration-300 ease-linear ${
+                    index === currentIndex 
+                      ? 'opacity-100 z-10' 
+                      : 'opacity-0 z-0 pointer-events-none'
                   }`}
+                  style={{
+                    willChange: 'opacity',
+                  }}
                 >
                   <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-secondary/40 via-background to-secondary/30 flex items-center justify-center p-6 h-full">
                     {/* Background layer that replaces white */}
@@ -120,6 +133,7 @@ export const TestimonialsSection = () => {
                         src={testimonial.image}
                         alt={`המלצה ${index + 1}`}
                         className="max-w-md w-full h-auto object-contain relative z-10"
+                        loading="eager"
                         style={{
                           mixBlendMode: 'multiply',
                           filter: 'contrast(1.1) brightness(0.95)',
