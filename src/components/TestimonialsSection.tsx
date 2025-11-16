@@ -28,13 +28,13 @@ export const TestimonialsSection = () => {
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
     }
-    // Start new interval
+    // Start new interval - longer delay to allow animation to complete
     intervalRef.current = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-    }, 3000); // 3 seconds
+    }, 4000); // 4 seconds - gives time for animation to complete smoothly
   };
 
-  // Auto-rotate testimonials every 3 seconds
+  // Auto-rotate testimonials every 4 seconds
   useEffect(() => {
     startAutoRotate();
 
@@ -59,11 +59,11 @@ export const TestimonialsSection = () => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
-    // Resume after 5 seconds (gives user time to view the testimonial)
+    // Resume after 6 seconds (gives user time to view the testimonial + animation time)
     timeoutRef.current = setTimeout(() => {
       startAutoRotate();
       timeoutRef.current = null;
-    }, 5000); // 5 seconds pause
+    }, 6000); // 6 seconds pause - enough time to view and for smooth transition
   };
 
   const goToNext = () => {
@@ -103,15 +103,18 @@ export const TestimonialsSection = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative"
           >
-            <div className="overflow-hidden relative">
+            <div className="overflow-hidden relative min-h-[400px] md:min-h-[500px]">
               <AnimatePresence initial={false}>
                 <motion.div
                   key={currentIndex}
-                  initial={{ opacity: 0, x: 100 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -100 }}
-                  transition={{ duration: 0.3, ease: "easeInOut" }}
-                  className="relative"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ 
+                    duration: 0.25, 
+                    ease: "easeInOut",
+                  }}
+                  className="relative w-full"
                 >
                   <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-secondary/40 via-background to-secondary/30 flex items-center justify-center p-6">
                     {/* Background layer that replaces white */}
