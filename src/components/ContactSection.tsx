@@ -40,13 +40,21 @@ export const ContactSection = ({ onFormSubmit }: ContactSectionProps) => {
         body: JSON.stringify({
           access_key: accessKey,
           subject: `פנייה חדשה מאתר - ${formData.name}`,
-          from_name: formData.name,
-          from_email: formData.email,
-          message: `שם: ${formData.name}\nאימייל: ${formData.email}\nטלפון: ${formData.phone}\n\nהודעה:\n${formData.message}`,
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          message: formData.message,
         }),
       });
 
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({ message: 'Unknown error' }));
+        console.error("Web3Forms API error:", errorData);
+        throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+      }
+
       const result = await response.json();
+      console.log("Web3Forms response:", result);
 
       if (result.success) {
         toast.success("תודה! אהיה בקשר בקרוב כדי ליצור קסם יחד.");
