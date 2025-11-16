@@ -27,13 +27,13 @@ export const TestimonialsSection = () => {
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
     }
-    // Start new interval - longer delay to allow animation to complete
+    // Start new interval - 1.5 seconds
     intervalRef.current = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-    }, 4000); // 4 seconds - gives time for animation to complete smoothly
+    }, 1500); // 1.5 seconds
   };
 
-  // Auto-rotate testimonials every 4 seconds
+  // Auto-rotate testimonials every 1.5 seconds
   useEffect(() => {
     startAutoRotate();
 
@@ -58,11 +58,11 @@ export const TestimonialsSection = () => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
-    // Resume after 6 seconds (gives user time to view the testimonial + animation time)
+    // Resume after 4 seconds (gives user time to view the testimonial + animation time)
     timeoutRef.current = setTimeout(() => {
       startAutoRotate();
       timeoutRef.current = null;
-    }, 6000); // 6 seconds pause - enough time to view and for smooth transition
+    }, 4000); // 4 seconds pause - enough time to view and for smooth transition
   };
 
   const goToNext = () => {
