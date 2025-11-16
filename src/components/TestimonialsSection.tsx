@@ -19,22 +19,43 @@ export const TestimonialsSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [currentIndex, setCurrentIndex] = useState(0);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   // Auto-rotate testimonials every 3 seconds (faster)
   useEffect(() => {
-    const interval = setInterval(() => {
+    intervalRef.current = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % testimonials.length);
     }, 3000); // 3 seconds (faster)
 
-    return () => clearInterval(interval);
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
   }, []);
+
+  const resetAutoRotate = () => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+    intervalRef.current = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+    }, 3000);
+  };
 
   const goToNext = () => {
     setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+    resetAutoRotate();
   };
 
   const goToPrevious = () => {
     setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+    resetAutoRotate();
+  };
+
+  const goToIndex = (index: number) => {
+    setCurrentIndex(index);
+    resetAutoRotate();
   };
 
   return (
@@ -52,65 +73,67 @@ export const TestimonialsSection = () => {
           </h2>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={isInView ? { opacity: 1, scale: 1 } : {}}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="relative"
-        >
-          <div className="overflow-hidden relative">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={currentIndex}
-                initial={{ opacity: 0, x: 100 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -100 }}
-                transition={{ duration: 0.4, ease: "easeInOut" }}
-                className="relative"
-              >
-                <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-secondary/40 via-background to-secondary/30 flex items-center justify-center p-6">
-                  {/* Background layer that replaces white */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-secondary/50 via-background to-secondary/40 rounded-2xl" />
-                  
-                  {/* Image with blend mode to remove white background */}
-                  <div className="relative z-10" style={{ isolation: 'isolate' }}>
-                    <img
-                      src={testimonials[currentIndex].image}
-                      alt={`המלצה ${currentIndex + 1}`}
-                      className="max-w-md w-full h-auto object-contain relative z-10"
-                      style={{
-                        mixBlendMode: 'multiply',
-                        filter: 'contrast(1.1) brightness(0.95)',
-                      }}
-                    />
+        <div className="relative">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="relative"
+          >
+            <div className="overflow-hidden relative">
+              <AnimatePresence initial={false}>
+                <motion.div
+                  key={currentIndex}
+                  initial={{ opacity: 0, x: 100 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -100 }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                  className="relative"
+                >
+                  <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-secondary/40 via-background to-secondary/30 flex items-center justify-center p-6">
+                    {/* Background layer that replaces white */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-secondary/50 via-background to-secondary/40 rounded-2xl" />
+                    
+                    {/* Image with blend mode to remove white background */}
+                    <div className="relative z-10" style={{ isolation: 'isolate' }}>
+                      <img
+                        src={testimonials[currentIndex].image}
+                        alt={`המלצה ${currentIndex + 1}`}
+                        className="max-w-md w-full h-auto object-contain relative z-10"
+                        style={{
+                          mixBlendMode: 'multiply',
+                          filter: 'contrast(1.1) brightness(0.95)',
+                        }}
+                      />
+                    </div>
                   </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </motion.div>
 
-          {/* Navigation Buttons */}
-          <div className="flex items-center justify-center gap-4 mt-6">
+          {/* Navigation Buttons - Always visible */}
+          <div className="flex items-center justify-center gap-4 mt-6 z-20 relative">
             <Button
               onClick={goToPrevious}
               variant="outline"
               size="lg"
-              className="rounded-full w-12 h-12 p-0 bg-background/80 hover:bg-background border-2 border-primary shadow-luxury"
+              className="rounded-full w-14 h-14 p-0 bg-background/90 hover:bg-background border-2 border-primary shadow-luxury flex items-center justify-center"
               aria-label="המלצה הקודמת"
             >
-              <ChevronRight className="w-6 h-6" />
+              <ChevronRight className="w-6 h-6 text-primary" />
             </Button>
             
             {/* Dot indicators */}
-            <div className="flex gap-2">
+            <div className="flex gap-2 items-center">
               {testimonials.map((_, index) => (
                 <button
                   key={index}
-                  onClick={() => setCurrentIndex(index)}
-                  className={`w-3 h-3 rounded-full transition-all ${
+                  onClick={() => goToIndex(index)}
+                  className={`h-3 rounded-full transition-all duration-300 ${
                     index === currentIndex
                       ? "bg-primary w-8"
-                      : "bg-muted hover:bg-primary/50"
+                      : "bg-muted hover:bg-primary/50 w-3"
                   }`}
                   aria-label={`המלצה ${index + 1}`}
                 />
@@ -121,13 +144,13 @@ export const TestimonialsSection = () => {
               onClick={goToNext}
               variant="outline"
               size="lg"
-              className="rounded-full w-12 h-12 p-0 bg-background/80 hover:bg-background border-2 border-primary shadow-luxury"
+              className="rounded-full w-14 h-14 p-0 bg-background/90 hover:bg-background border-2 border-primary shadow-luxury flex items-center justify-center"
               aria-label="המלצה הבאה"
             >
-              <ChevronLeft className="w-6 h-6" />
+              <ChevronLeft className="w-6 h-6 text-primary" />
             </Button>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
