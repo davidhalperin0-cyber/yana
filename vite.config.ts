@@ -5,10 +5,12 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
-  // For GitHub Pages, always use /yana/ base path in production
+  // For GitHub Pages, use /yana/ base path
+  // For Vercel, use / (root)
+  const isGitHubPages = process.env.GITHUB_PAGES === 'true';
   const isProduction = process.env.NODE_ENV === 'production' || mode === 'production';
   return {
-  base: isProduction ? '/yana/' : '/',
+  base: (isProduction && isGitHubPages) ? '/yana/' : '/',
   server: {
     host: "::",
     port: 8080,
