@@ -18,11 +18,11 @@ export const TestimonialsSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Auto-rotate testimonials every 5 seconds
+  // Auto-rotate testimonials every 10 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-    }, 5000); // 5 seconds
+    }, 10000); // 10 seconds
 
     return () => clearInterval(interval);
   }, []);
