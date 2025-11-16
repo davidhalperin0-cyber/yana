@@ -16,11 +16,13 @@ import { CoursePage } from "@/components/CoursePage";
 const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [showCourse, setShowCourse] = useState(false);
+  const [hasCourseAccess, setHasCourseAccess] = useState(false);
 
   useEffect(() => {
     // Check if user has access to course (stored in localStorage)
-    const hasCourseAccess = localStorage.getItem("courseAccess") === "true";
-    if (hasCourseAccess) {
+    const access = localStorage.getItem("courseAccess") === "true";
+    setHasCourseAccess(access);
+    if (access) {
       setShowCourse(true);
     }
     // Ensure smooth scrolling
@@ -30,6 +32,7 @@ const Index = () => {
   const handleFormSubmit = (email?: string) => {
     // Save access permanently - user will always have access
     localStorage.setItem("courseAccess", "true");
+    setHasCourseAccess(true);
     if (email) {
       // Also save email for future reference
       localStorage.setItem("userEmail", email);
@@ -62,7 +65,7 @@ const Index = () => {
             </>
           ) : (
             <>
-              <HeroSection onGoToCourse={localStorage.getItem("courseAccess") === "true" ? () => setShowCourse(true) : undefined} />
+              <HeroSection onGoToCourse={hasCourseAccess ? () => setShowCourse(true) : undefined} />
               <AboutSection />
               <WhyChooseUsSection />
               <PartnersSection />
