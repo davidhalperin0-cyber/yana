@@ -26,7 +26,7 @@ export const HeroSection = ({ onGoToCourse }: HeroSectionProps) => {
           className="absolute inset-0 bg-cover bg-center"
           style={{ 
             backgroundImage: `url(${heroBackground})`,
-            backgroundPosition: 'center top',
+            backgroundPosition: 'center center',
             backgroundSize: 'cover'
           }}
         />
