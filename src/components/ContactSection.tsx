@@ -137,7 +137,8 @@ export const ContactSection = ({ onFormSubmit }: ContactSectionProps) => {
                   value={formData.phone}
                   onChange={handleChange}
                   required
-                  className="h-12 bg-background/50 border-border/50 focus:border-primary transition-colors"
+                  dir="rtl"
+                  className="h-12 bg-background/50 border-border/50 focus:border-primary transition-colors text-right"
                 />
               </div>
 
@@ -147,7 +148,6 @@ export const ContactSection = ({ onFormSubmit }: ContactSectionProps) => {
                   placeholder="ספרי לי על החזון שלך לאירוע..."
                   value={formData.message}
                   onChange={handleChange}
-                  required
                   rows={6}
                   className="bg-background/50 border-border/50 focus:border-primary transition-colors resize-none"
                 />
