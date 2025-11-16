@@ -167,7 +167,7 @@ export const ContactSection = ({ onFormSubmit }: ContactSectionProps) => {
           >
             <div>
               <h3 className="text-2xl font-bold mb-6 text-center">ליצירת קשר</h3>
-              <div className="flex justify-between items-center gap-12 flex-nowrap">
+              <div className="flex flex-col md:flex-row justify-between items-center gap-6 md:gap-12">
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 rounded-full bg-gradient-primary flex items-center justify-center flex-shrink-0">
                     <Mail className="w-5 h-5 text-white" />

@@ -82,7 +82,7 @@ export const AccessibilityPanel = () => {
       {/* Toggle Button */}
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 left-6 z-50 w-14 h-14 rounded-full bg-primary text-white shadow-luxury flex items-center justify-center hover:scale-110 transition-transform"
+        className="fixed bottom-4 md:bottom-6 left-4 md:left-6 z-50 w-12 h-12 md:w-14 md:h-14 rounded-full bg-primary text-white shadow-luxury flex items-center justify-center hover:scale-110 transition-transform"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
         aria-label="פתח תפריט נגישות"
@@ -97,7 +97,7 @@ export const AccessibilityPanel = () => {
             initial={{ opacity: 0, x: -100 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -100 }}
-            className="fixed bottom-24 left-6 z-50 bg-background border-2 border-primary rounded-2xl shadow-luxury p-6 w-80"
+            className="fixed bottom-24 left-4 md:left-6 z-50 bg-background border-2 border-primary rounded-2xl shadow-luxury p-4 md:p-6 w-[calc(100vw-2rem)] max-w-80 md:w-80"
           >
             <h3 className="text-xl font-bold mb-4 text-center">נגישות</h3>
 
