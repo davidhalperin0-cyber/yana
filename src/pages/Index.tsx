@@ -72,7 +72,11 @@ const Index = () => {
               <ServicesSection />
               <TestimonialsSection />
               <SocialSection />
-              <ContactSection onFormSubmit={handleFormSubmit} />
+              <ContactSection 
+                onFormSubmit={handleFormSubmit} 
+                hasCourseAccess={hasCourseAccess}
+                onGoToCourse={() => setShowCourse(true)}
+              />
               <Footer />
             </>
           )}

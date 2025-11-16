@@ -9,9 +9,11 @@ import { Mail, Phone, MapPin } from "lucide-react";
 
 interface ContactSectionProps {
   onFormSubmit?: (email?: string) => void;
+  hasCourseAccess?: boolean;
+  onGoToCourse?: () => void;
 }
 
-export const ContactSection = ({ onFormSubmit }: ContactSectionProps) => {
+export const ContactSection = ({ onFormSubmit, hasCourseAccess, onGoToCourse }: ContactSectionProps) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [formData, setFormData] = useState({
@@ -95,8 +97,27 @@ export const ContactSection = ({ onFormSubmit }: ContactSectionProps) => {
         >
           <div className="w-16 h-1 bg-gradient-primary mx-auto rounded-full mb-4" />
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-            לקבלת המדריך
+            {hasCourseAccess ? "למדריך המלא" : "לקבלת המדריך"}
           </h2>
+          {hasCourseAccess && onGoToCourse && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="mb-6"
+            >
+              <p className="text-lg text-muted-foreground mb-4">
+                יש לך כבר גישה למדריך המלא!
+              </p>
+              <Button
+                size="lg"
+                onClick={onGoToCourse}
+                className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-luxury text-lg px-8 py-6"
+              >
+                צפייה במדריך
+              </Button>
+            </motion.div>
+          )}
         </motion.div>
 
         <div className="flex flex-col items-center">
