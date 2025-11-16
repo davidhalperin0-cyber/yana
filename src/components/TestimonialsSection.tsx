@@ -20,42 +20,65 @@ export const TestimonialsSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [currentIndex, setCurrentIndex] = useState(0);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Auto-rotate testimonials every 3 seconds (faster)
-  useEffect(() => {
+  // Function to start auto-rotate
+  const startAutoRotate = () => {
+    // Clear existing interval
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+    // Start new interval
     intervalRef.current = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-    }, 3000); // 3 seconds (faster)
+    }, 3000); // 3 seconds
+  };
+
+  // Auto-rotate testimonials every 3 seconds
+  useEffect(() => {
+    startAutoRotate();
 
     return () => {
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
       }
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
     };
   }, []);
 
-  const resetAutoRotate = () => {
+  // Function to pause auto-rotate and resume after delay
+  const pauseAndResumeAutoRotate = () => {
+    // Stop the current interval
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
+      intervalRef.current = null;
     }
-    intervalRef.current = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-    }, 3000);
+    // Clear any existing timeout
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    // Resume after 5 seconds (gives user time to view the testimonial)
+    timeoutRef.current = setTimeout(() => {
+      startAutoRotate();
+      timeoutRef.current = null;
+    }, 5000); // 5 seconds pause
   };
 
   const goToNext = () => {
     setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-    resetAutoRotate();
+    pauseAndResumeAutoRotate();
   };
 
   const goToPrevious = () => {
     setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-    resetAutoRotate();
+    pauseAndResumeAutoRotate();
   };
 
   const goToIndex = (index: number) => {
     setCurrentIndex(index);
-    resetAutoRotate();
+    pauseAndResumeAutoRotate();
   };
 
   return (
