@@ -4,8 +4,11 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => ({
-  base: mode === 'production' ? '/yana/' : '/',
+export default defineConfig(({ mode }) => {
+  // For GitHub Pages, always use /yana/ base path in production
+  const isProduction = process.env.NODE_ENV === 'production' || mode === 'production';
+  return {
+  base: isProduction ? '/yana/' : '/',
   server: {
     host: "::",
     port: 8080,
@@ -16,4 +19,5 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-}));
+  };
+});
