@@ -1,6 +1,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
+import { ChevronRight, ChevronLeft } from "lucide-react";
+import { Button } from "./ui/button";
 import testimonial1 from "@/assets/WhatsApp Image 2025-11-15 at 17.23.47 (1).jpeg";
 import testimonial2 from "@/assets/WhatsApp Image 2025-11-12 at 17.46.04.jpeg";
 
@@ -18,14 +20,22 @@ export const TestimonialsSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Auto-rotate testimonials every 10 seconds
+  // Auto-rotate testimonials every 5 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-    }, 10000); // 10 seconds
+    }, 5000); // 5 seconds
 
     return () => clearInterval(interval);
   }, []);
+
+  const goToNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+  };
+
+  const goToPrevious = () => {
+    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  };
 
   return (
     <section className="py-24 px-4 bg-gradient-to-b from-background to-secondary/30">
@@ -77,6 +87,29 @@ export const TestimonialsSection = () => {
                 </div>
               </motion.div>
             </AnimatePresence>
+          </div>
+
+          {/* Navigation Buttons */}
+          <div className="flex items-center justify-center gap-4 mt-6">
+            <Button
+              onClick={goToPrevious}
+              variant="outline"
+              size="lg"
+              className="rounded-full w-14 h-14 p-0 bg-background/90 hover:bg-background border-2 border-primary shadow-luxury flex items-center justify-center"
+              aria-label="המלצה הקודמת"
+            >
+              <ChevronRight className="w-6 h-6 text-primary" />
+            </Button>
+
+            <Button
+              onClick={goToNext}
+              variant="outline"
+              size="lg"
+              className="rounded-full w-14 h-14 p-0 bg-background/90 hover:bg-background border-2 border-primary shadow-luxury flex items-center justify-center"
+              aria-label="המלצה הבאה"
+            >
+              <ChevronLeft className="w-6 h-6 text-primary" />
+            </Button>
           </div>
         </motion.div>
       </div>

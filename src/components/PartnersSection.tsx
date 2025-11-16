@@ -48,7 +48,7 @@ export const PartnersSection = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="relative mt-16"
         >
-          <div className="flex flex-wrap justify-center items-center gap-2 md:gap-3 lg:gap-4">
+          <div className="grid grid-cols-3 md:flex md:flex-wrap justify-center items-center gap-3 md:gap-3 lg:gap-4">
             {partners.map((partner, index) => (
               <motion.div
                 key={index}
