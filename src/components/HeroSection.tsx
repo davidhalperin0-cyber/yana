@@ -26,10 +26,8 @@ export const HeroSection = ({ onGoToCourse }: HeroSectionProps) => {
           className="absolute inset-0 bg-cover bg-center"
           style={{ 
             backgroundImage: `url(${heroBackground})`,
-            backgroundPosition: 'center top',
-            backgroundSize: 'cover',
-            transform: 'scale(0.7)',
-            transformOrigin: 'center top'
+            backgroundPosition: 'center 20%',
+            backgroundSize: 'cover'
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-background" />
