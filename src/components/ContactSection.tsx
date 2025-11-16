@@ -41,9 +41,8 @@ export const ContactSection = ({ onFormSubmit }: ContactSectionProps) => {
           access_key: accessKey,
           subject: `פנייה חדשה מאתר - ${formData.name}`,
           from_name: formData.name,
-          email: formData.email,
+          from_email: formData.email,
           message: `שם: ${formData.name}\nאימייל: ${formData.email}\nטלפון: ${formData.phone}\n\nהודעה:\n${formData.message}`,
-          to_email: "yanchigolan@gmail.com",
         }),
       });
 
@@ -57,7 +56,8 @@ export const ContactSection = ({ onFormSubmit }: ContactSectionProps) => {
           onFormSubmit();
         }
       } else {
-        throw new Error("Failed to send email");
+        console.error("Web3Forms error:", result);
+        throw new Error(result.message || "Failed to send email");
       }
     } catch (error) {
       console.error("Error sending email:", error);
