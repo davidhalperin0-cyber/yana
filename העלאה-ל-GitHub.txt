@@ -1,0 +1,48 @@
+הוראות להעלאת הקוד ל-GitHub:
+
+═══════════════════════════════════════════════════════
+
+דרך 1: GitHub Desktop (הכי קל - 2 דקות)
+
+1. הורד GitHub Desktop:
+   https://desktop.github.com/
+
+2. התקן ופתח את GitHub Desktop
+
+3. File → Add Local Repository
+   בחר: /Users/harelhalperin/Desktop/aurora-event-design
+
+4. לחץ על "Publish repository"
+   התחבר עם: davidhalperin0-cyber
+
+5. הקוד יעלה אוטומטית!
+
+═══════════════════════════════════════════════════════
+
+דרך 2: דרך האתר של GitHub (5 דקות)
+
+1. לך ל: https://github.com/davidhalperin0-cyber/yana
+
+2. לחץ על "uploading an existing file"
+
+3. גרור את כל התיקייה:
+   /Users/harelhalperin/Desktop/aurora-event-design
+
+4. כתוב commit message: "Initial commit"
+
+5. לחץ "Commit changes"
+
+═══════════════════════════════════════════════════════
+
+אחרי שהקוד ב-GitHub:
+
+1. לך ל: https://github.com/davidhalperin0-cyber/yana
+
+2. Settings → Pages
+
+3. Source: בחר "GitHub Actions"
+
+4. הקישור יהיה: https://davidhalperin0-cyber.github.io/yana/
+
+═══════════════════════════════════════════════════════
+
