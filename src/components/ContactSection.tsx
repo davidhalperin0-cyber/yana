@@ -23,9 +23,51 @@ export const ContactSection = ({ onFormSubmit, hasCourseAccess, onGoToCourse }: 
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState({
+    email: "",
+    phone: "",
+  });
+
+  // Validation functions
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validatePhone = (phone: string): boolean => {
+    // Remove spaces, dashes, and plus signs for validation
+    const cleanPhone = phone.replace(/[\s\-+]/g, '');
+    // Israeli phone: 10 digits (starts with 05) or 9 digits (starts with 0) or international format
+    const israeliPhoneRegex = /^(0[2-9]|05[0-9])[0-9]{7,8}$/;
+    const internationalRegex = /^972[2-9][0-9]{8}$/;
+    return israeliPhoneRegex.test(cleanPhone) || internationalRegex.test(cleanPhone);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate form
+    const newErrors = {
+      email: "",
+      phone: "",
+    };
+
+    if (!formData.email || !validateEmail(formData.email)) {
+      newErrors.email = "אנא הכנס כתובת אימייל תקינה";
+    }
+
+    if (!formData.phone || !validatePhone(formData.phone)) {
+      newErrors.phone = "אנא הכנס מספר טלפון תקין (ישראל)";
+    }
+
+    setErrors(newErrors);
+
+    // If there are errors, don't submit
+    if (newErrors.email || newErrors.phone) {
+      toast.error("אנא תקן את השגיאות בטופס");
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
@@ -80,10 +122,19 @@ export const ContactSection = ({ onFormSubmit, hasCourseAccess, onGoToCourse }: 
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value,
+      [name]: value,
     }));
+
+    // Clear error when user starts typing
+    if (name === "email" && errors.email) {
+      setErrors((prev) => ({ ...prev, email: "" }));
+    }
+    if (name === "phone" && errors.phone) {
+      setErrors((prev) => ({ ...prev, phone: "" }));
+    }
   };
 
   return (
@@ -148,21 +199,31 @@ export const ContactSection = ({ onFormSubmit, hasCourseAccess, onGoToCourse }: 
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="h-12 bg-background/50 border-border/50 focus:border-primary transition-colors"
+                  className={`h-12 bg-background/50 border-border/50 focus:border-primary transition-colors ${
+                    errors.email ? "border-red-500" : ""
+                  }`}
                 />
+                {errors.email && (
+                  <p className="text-red-500 text-sm mt-1 text-right">{errors.email}</p>
+                )}
               </div>
 
               <div>
                 <Input
                   name="phone"
                   type="tel"
-                  placeholder="מספר הטלפון שלך"
+                  placeholder="מספר הטלפון שלך (לדוגמה: 050-1234567)"
                   value={formData.phone}
                   onChange={handleChange}
                   required
                   dir="rtl"
-                  className="h-12 bg-background/50 border-border/50 focus:border-primary transition-colors text-right"
+                  className={`h-12 bg-background/50 border-border/50 focus:border-primary transition-colors text-right ${
+                    errors.phone ? "border-red-500" : ""
+                  }`}
                 />
+                {errors.phone && (
+                  <p className="text-red-500 text-sm mt-1 text-right">{errors.phone}</p>
+                )}
               </div>
 
               <div>
