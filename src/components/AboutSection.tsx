@@ -26,7 +26,7 @@ export const AboutSection = () => {
           </motion.div>
 
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8 text-primary">
-            הסיפור שלה
+            הסיפור שלי
           </h2>
         </motion.div>
 

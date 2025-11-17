@@ -12,12 +12,12 @@ import video5 from "@/video/5.mp4";
 import video6 from "@/video/6.mp4";
 
 const videos = [
-  { id: 1, src: video1, title: "סרטון 1" },
-  { id: 2, src: video2, title: "סרטון 2" },
-  { id: 3, src: video3, title: "סרטון 3" },
-  { id: 4, src: video4, title: "סרטון 4" },
-  { id: 5, src: video5, title: "סרטון 5" },
-  { id: 6, src: video6, title: "סרטון 6" },
+  { id: 1, src: video1, title: "מה זה בעצם חתונה שטח?" },
+  { id: 2, src: video2, title: "תקציב" },
+  { id: 3, src: video3, title: "אורחים וסקר שוק" },
+  { id: 4, src: video4, title: "איך מוצאים שטח מתאים?" },
+  { id: 5, src: video5, title: "תיאום ציפיות ובחירת ספקים" },
+  { id: 6, src: video6, title: "תכנון סקיצה ובחירת עיצוב" },
 ];
 
 interface CoursePageProps {
@@ -89,7 +89,7 @@ export const CoursePage = ({ onBackToHome }: CoursePageProps) => {
           )}
           <div className="w-16 h-1 bg-gradient-primary mx-auto rounded-full mb-4" />
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-            קורס מזורז לאירועי שטח
+            כל התשובות שלכם בסרטון קצר וברור
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
             כל מה שצריך לדעת כדי להפוך שטח פתוח לחתונה הכי מיוחדת שראיתם

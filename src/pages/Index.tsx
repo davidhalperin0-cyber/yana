@@ -12,6 +12,7 @@ import { ContactSection } from "@/components/ContactSection";
 import { Footer } from "@/components/Footer";
 import { AccessibilityPanel } from "@/components/AccessibilityPanel";
 import { CoursePage } from "@/components/CoursePage";
+import { FloatingContactButton } from "@/components/FloatingContactButton";
 
 const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -58,6 +59,7 @@ const Index = () => {
       {!isLoading && (
         <main className="overflow-hidden">
           <AccessibilityPanel />
+          {!showCourse && <FloatingContactButton />}
           {showCourse ? (
             <>
               <CoursePage onBackToHome={handleBackToHome} />

@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import misradLogo from "@/assets/misrad.png";
+import misradLogo from "@/assets/channels4_profile.jpg";
 import hozaLogo from "@/assets/hoza.png";
 import ikeaLogo from "@/assets/ikea.webp";
 import ayalonLogo from "@/assets/ayalon.png";
