@@ -98,6 +98,22 @@ All colors MUST be HSL.
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   }
 
+  /* Prevent jumping on mobile when keyboard opens */
+  @media (max-width: 768px) {
+    html {
+      height: -webkit-fill-available;
+    }
+    
+    body {
+      min-height: 100vh;
+      min-height: -webkit-fill-available;
+    }
+    
+    input, textarea, select {
+      font-size: 16px !important; /* Prevents zoom on iOS */
+    }
+  }
+
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Cormorant Garamond', 'David', 'Times New Roman', serif;
     font-weight: 600;

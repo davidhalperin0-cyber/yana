@@ -183,11 +183,13 @@ export const ContactSection = ({ onFormSubmit, hasCourseAccess, onGoToCourse }: 
               <div>
                 <Input
                   name="name"
+                  type="text"
+                  inputMode="text"
                   placeholder="השם שלך"
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="h-12 bg-background/50 border-border/50 focus:border-primary transition-colors"
+                  className="h-12 bg-background/50 border-border/50 focus:border-primary transition-colors text-base"
                 />
               </div>
 
@@ -195,11 +197,12 @@ export const ContactSection = ({ onFormSubmit, hasCourseAccess, onGoToCourse }: 
                 <Input
                   name="email"
                   type="email"
+                  inputMode="email"
                   placeholder="האימייל שלך"
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className={`h-12 bg-background/50 border-border/50 focus:border-primary transition-colors ${
+                  className={`h-12 bg-background/50 border-border/50 focus:border-primary transition-colors text-base ${
                     errors.email ? "border-red-500" : ""
                   }`}
                 />
@@ -212,12 +215,13 @@ export const ContactSection = ({ onFormSubmit, hasCourseAccess, onGoToCourse }: 
                 <Input
                   name="phone"
                   type="tel"
+                  inputMode="tel"
                   placeholder="מספר הטלפון שלך (לדוגמה: 050-1234567)"
                   value={formData.phone}
                   onChange={handleChange}
                   required
                   dir="rtl"
-                  className={`h-12 bg-background/50 border-border/50 focus:border-primary transition-colors text-right ${
+                  className={`h-12 bg-background/50 border-border/50 focus:border-primary transition-colors text-right text-base ${
                     errors.phone ? "border-red-500" : ""
                   }`}
                 />
@@ -233,7 +237,7 @@ export const ContactSection = ({ onFormSubmit, hasCourseAccess, onGoToCourse }: 
                   value={formData.message}
                   onChange={handleChange}
                   rows={6}
-                  className="bg-background/50 border-border/50 focus:border-primary transition-colors resize-none"
+                  className="bg-background/50 border-border/50 focus:border-primary transition-colors resize-none text-base"
                 />
               </div>
 
