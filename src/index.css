@@ -112,6 +112,20 @@ All colors MUST be HSL.
     input, textarea, select {
       font-size: 16px !important; /* Prevents zoom on iOS */
     }
+    
+    textarea {
+      /* Prevent jumping when keyboard opens */
+      -webkit-appearance: none;
+      appearance: none;
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
+    }
+    
+    /* Prevent layout shift when focusing on inputs */
+    input:focus, textarea:focus {
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
+    }
   }
 
   h1, h2, h3, h4, h5, h6 {

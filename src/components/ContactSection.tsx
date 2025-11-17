@@ -236,8 +236,18 @@ export const ContactSection = ({ onFormSubmit, hasCourseAccess, onGoToCourse }: 
                   placeholder="ספרי לי על החזון שלך לאירוע..."
                   value={formData.message}
                   onChange={handleChange}
+                  onFocus={(e) => {
+                    // Prevent viewport jumping on mobile
+                    if (window.innerWidth <= 768) {
+                      setTimeout(() => {
+                        e.target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                      }, 100);
+                    }
+                  }}
                   rows={6}
+                  inputMode="text"
                   className="bg-background/50 border-border/50 focus:border-primary transition-colors resize-none text-base"
+                  style={{ fontSize: '16px' }}
                 />
               </div>
 
