@@ -5,6 +5,7 @@ import { ChevronRight, ChevronLeft } from "lucide-react";
 import { Button } from "./ui/button";
 import testimonial1 from "@/assets/WhatsApp Image 2025-11-15 at 17.23.47 (1).jpeg";
 import testimonial2 from "@/assets/WhatsApp Image 2025-11-12 at 17.46.04.jpeg";
+import testimonial3 from "@/assets/WhatsApp Image.jpeg";
 
 const testimonials = [
   {
@@ -12,6 +13,9 @@ const testimonials = [
   },
   {
     image: testimonial2,
+  },
+  {
+    image: testimonial3,
   },
 ];
 
